@@ -107,14 +107,20 @@ Ponte entre o usuário e o hardware, compõe a parte central do SO e responde po
     * nenhuma = 0
 
 #### Gerenciamento de pacotes
-`apt-get` = gerenciador mais baixo nível (do sistema), não muito amigável com o usuário, não passa muitas informações, usado para, por exemplo, instalar aplicativos que serão usados no servidor
-`apt` = gerenciador mais moderno, tem uma interação mais amigável, usado para, por exemplo, para saber se tem algo que precisa atualizar, para fazer buscas
-`apt list` = verificar quais pacotes há disponíveis no sistema para baixar
-`apt list --installed` = verificar quais pacotes estão instalados na máquina atualmente
-`apt list --upgradable` = verificar se há atualizações a serem feitas
-`apt search <nome pacote/aplicação>` = buscar pacote/aplicação
-`apt install <nome arquivo>` = instalar arquivo
-`apt remove <nome arquivo>` = desinstalar/remover arquivo
+* `apt` = gerenciador de pacotes em distribuições Debian/Ubuntu
+* `dnf` e `yum` = gerenciador de pacotes em distribuições Fedora/openSUSE/Red Hat
+
+* `apt-get` = gerenciador mais baixo nível (do sistema), não muito amigável com o usuário, não passa muitas informações, usado para, por exemplo, instalar aplicativos que serão usados no servidor
+* `apt` = gerenciador mais moderno, tem uma interação mais amigável, usado para, por exemplo, para saber se tem algo que precisa atualizar, para fazer buscas
+* `apt list` = verificar quais pacotes há disponíveis no sistema para baixar
+* `apt list --installed` = verificar quais pacotes estão instalados na máquina atualmente
+* `apt list --upgradable` = verificar se há atualizações a serem feitas
+* `apt search <nome pacote/aplicação>` = buscar pacote/aplicação
+* `apt install <nome pacote/arquivo>` = instalar pacotes ou arquivos de instalação (`.deb` em distribuições Debian/Ubuntu; `.rpm` em distribuições Fedora/openSUSE)
+* `apt remove <nome arquivo>` = desinstalar/remover arquivo
+* `apt update` = atualizar os pacotes disponíveis
+* `apt upgrade -y` = instalar o que foi baixado pelo update
+    * `-y` = faz a atualização sem perguntar nada
 
 #### Compactar / descompactar arquivos
 `unzip <nome arquivo>` = descompactar arquivo 
