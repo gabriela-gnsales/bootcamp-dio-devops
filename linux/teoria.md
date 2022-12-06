@@ -125,6 +125,26 @@ Ponte entre o usuário e o hardware, compõe a parte central do SO e responde po
 #### Compactar / descompactar arquivos
 `unzip <nome arquivo>` = descompactar arquivo 
 
+#### Discos
+Armazenar arquivos (fisicamente)
+* HD: mais barato e lento
+* SSD: mais rápido e caro
+
+__Sistemas de arquivos:__ é um padrão, uma forma como o S.O. usa para controlar como os dados são armazenados e recuperados
+* MacOS: HFS
+* Unix/Linux: Ext3, Ext4, XFS
+* Windows: FAT32, NTFS
+
+__Particionamento:__ divisão de um disco em partes; cada parte ou partição é independente da outra; cada partição pode ter um sistema de arquivos diferente
+* Unix/Linux: cada disco recebe um nome iniciado por sd (ex: sda, sdb, sdc…); cada partição do disco é numerada (ex: sda1, sda2, sda3, sdb1, sdb2…)
+* Windows: cada partição é reconhecida como uma unidade e nomeada como uma letra (ex: C, D, E...)
+
+##### Comandos gerenciamento de discos
+* `lsblk` ou `fdisk -l` = visualizar os discos disponíveis
+* `mkfs.<nome sistema de arquivo> <caminho disco>` ex: `mkfs.ext3 /dev/sdb` = formatar disco
+
+
 ***
 
 `ifconfig` = verificar o IP da máquina, disponível no pacote `net-tools`
+
