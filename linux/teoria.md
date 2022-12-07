@@ -84,7 +84,7 @@ Ponte entre o usuário e o hardware, compõe a parte central do SO e responde po
 * `/etc/group` = diretório onde estão listados os grupos
 * `/etc/sudoers` = diretório onde estão listados os usuários com permissão de root
 
-#### Trabalhando com usuários e grupos
+#### Usuários e grupos
 * `useradd <nome usuário>` = adicionar usuário, sem informações de senha...
     * `-m` = flag para que os diretórios do usuário sejam criados dentro do diretório /home
     * `-c` = flag para cadastrar o nome completo do usuário
@@ -109,7 +109,6 @@ Ponte entre o usuário e o hardware, compõe a parte central do SO e responde po
 #### Gerenciamento de pacotes
 * `apt` = gerenciador de pacotes em distribuições Debian/Ubuntu
 * `dnf` e `yum` = gerenciador de pacotes em distribuições Fedora/openSUSE/Red Hat
-
 * `apt-get` = gerenciador mais baixo nível (do sistema), não muito amigável com o usuário, não passa muitas informações, usado para, por exemplo, instalar aplicativos que serão usados no servidor
 * `apt` = gerenciador mais moderno, tem uma interação mais amigável, usado para, por exemplo, para saber se tem algo que precisa atualizar, para fazer buscas
 * `apt list` = verificar quais pacotes há disponíveis no sistema para baixar
@@ -140,8 +139,28 @@ __Particionamento:__ divisão de um disco em partes; cada parte ou partição é
 * Windows: cada partição é reconhecida como uma unidade e nomeada como uma letra (ex: C, D, E...)
 
 ##### Comandos gerenciamento de discos
-* `lsblk` ou `fdisk -l` = visualizar os discos disponíveis
+* `lsblk` ou `fdisk -l` = visualizar os discos disponíveis, onde estão monstados
 * `mkfs.<nome sistema de arquivo> <caminho disco>` ex: `mkfs.ext3 /dev/sdb` = formatar disco
+* `mnt` = diretório normalmente usado para montar os discos
+* `mount <caminho disco> <caminho onde será montado>`  ex: `mount /dev/sdb /mnt/disco` = montar o disco
+* `umount <caminho disco>` ex: `mount /dev/sdb` = desmontar o disco
+* montar discos automaticamente → editar arquivo de configuração `/etc/fstab`
+    * indicar disco, onde será montado, sistema de arquivo e parâmetros padrão, ex: `/dev/sdb /disk2/ext4 defaults 0 0`
+
+#### Manipulação de arquivos
+* `cp <caminho origem com nome do arquivo e extensão> <caminho destino cópia>` = copiar arquivo
+    * pode usar filtros, ex: `cp /home/*.txt /pasta/` = todos os arquivos com extensão `txt`
+    * se tiver arquivos com o mesmo nome no local de destino serão sobrepostos (ATENÇÃO) → para evitar isso usar a flag `-i` (irá perguntar antes de sobrepor)
+    * flag `-v` = modo verboso → explica o que está acontecendo / sendo executado (no caso, copiado)
+* `mv <caminho origem com nome do arquivo e extensão> <caminho destino cópia>` = mover arquivos
+    * não há modo recursivo
+    * `mv` usado também para renomear arquivos
+* `ps` = visualizar processos em execução (chamados diretamente pelo terminal, mas não mostra os processos chamados no ambiente gráfico)
+    * `a` = mostra os processos de todos os usuários
+    * `u` = fornece o nome do usuário, aordem do processo
+    * `x` = mostra processos que foram executados fora do console
+* `kilall`= encerrar todos os processos
+* `w` = visualizar usuários que estão logados
 
 
 ***
