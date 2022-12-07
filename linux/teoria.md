@@ -162,8 +162,50 @@ __Particionamento:__ divisão de um disco em partes; cada parte ou partição é
 * `kilall`= encerrar todos os processos
 * `w` = visualizar usuários que estão logados
 
+#### Servidor de Arquivos
+* o Windows usa o __protocolo SMB__ para fazer o compartilahemnto de arquivos com o servidor e entre as máquinas
+* o Linux usa a aplicação SAMBA para utilizar o protocolo SMB
+* __SAMBA__ é o software utilizado para compartilhamento de arquivos de servidor Linux para consumo em computadores Windows
+* `smb.conf` = arquivo de configuração do SAMBA para a criação e definição dos compartilhamentos
+* não é aconselhável que o compartilhamento de arquivos esteja no mesmo disco do S.O. → ambos podem ficar lentos
+* __DAEMON__ → denominação no Linux para serviços executados em segundo plano (ex: SAMBA)
+* iniciar, reiniciar e fechar daemons → usar `systemctl`
+    * ex: `systemctl restart smbd` , `systemctl status smbd` , `systemctl enable smbd`
+    * `d` de daemon
+* configuração de cmpartilhamento → editar arquivo `/etc/samba/smb.conf`
+    * ex: 
+        ```
+          [publica]
+          path = /disk2/publica
+          writable = yes
+          guest ok = yes
+          guest only = yes
+        ```
+* acesso ao servidor é pelo IP
+* no Windows: `\\<IP>\<compartilhamento>`
+    * ex: `\\10.0.0.19\publica`
+    * mapear unidade de rede
 
-***
+#### Servidor Web
+* __protocolo HTTP__ ou __HTTPS__ (mais seguro)
+* ao colocar um endereço (nome site) na barra do navegador foi feita uma consulta em um servidor que tem um IP, envia uma resposta para a requisição
+* servidor DNS (Domain Name System) → sistema de nomes de domínios
+* `ping <site>` = comando para saber se o servidor está de pé (funcionando/acessível)
+* __APACHE__ → software que permite a publicação de sites em servidor Linux
+    * `systemctl start apache2` , `systemctl status apache2`
+    * usando WSL: `service apache2 start` , `service apache2 status`
+    * `ip a` = para saber o IP; ex: `inet 172.26.246.196/20 brd 172.26.255.255 scope global eth0`
+        * copiar o `172.26.246.196` no navegador e irá abrir uma página do Apache2 (Apache2 Ubuntu Default Page)
+* `/var/www/html` = diretório padrão para a publicação de um site no Apache
+* para a publicação de um site em uma instância na AWS deve ser liberado no firewall o protocolo HTTP
 
-`ifconfig` = verificar o IP da máquina, disponível no pacote `net-tools`
+#### Servidor de Banco de Dados
+* `apt search mysql-server` = fazer uma busca do servidor MySQL (exemplo de servidor de BD - `mysql-server-8.0` versão community)
+* `mysql -u root -p` = logar no BD (MySql nesse caso) como usuário root
+* `show databases;`= listar os BDs criados (obrigatório usar ; no final do comando)
+* `create database <nome>;` = criar database
+* `use <nome database>;`= usar database
+
+
+__OBS:__ `ifconfig` = verificar o IP da máquina, disponível no pacote `net-tools`
 
