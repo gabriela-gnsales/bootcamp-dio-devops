@@ -118,23 +118,14 @@ _RECOMENDAÇÃO:_ usar volumes, pois são criados e gerenciados pelo docker
 
         CMD python3 /opt/app.py
         ```
- * `docker build . -t <nome do usuário (opcional)>/<nome da imagem>` → gerar imagem
- * `docker push <nome do usuário>/<nome da imagem>` → subir a imagem para o hub (na versão free só pode ter 1 imagem privada) 
-
- → criar servidor (numa empresa, por exemplo) para armazenar imagens privadas
-
-registry → contêiner especifico para armazenar imagens
+* `docker build . -t <nome do usuário (opcional)>/<nome da imagem>` → gerar imagem
+* `docker push <nome do usuário>/<nome da imagem>` → subir a imagem para o hub (na versão free só pode ter 1 imagem privada); realizar o upload de imagens para um registry 
+* `docker image build`  → gerar uma imagem a partir de um docker file
+* criar servidor (numa empresa, por exemplo) para armazenar imagens privadas
+* `registry` → contêiner especifico para armazenar imagens; repositório de imagens
+* `WORKDIR` → parâmetro do arquivo docker file que indica o diretório padrão da aplicação da imagem
 
  __OBS:__ um arquivo Pid contém o nº de identificação do processo (pid)
-
-docker push 
-realizar o upload de imagens para um registry
-
-registry - repositório de imagens
-
-docker image build - gerar uma imagem a partir de um docker file
-
-WORKDIR - Parâmetro do arquivo docker file que indica o diretório padrão da aplicação da imagem
  
 ##### Docker Compose
 Ferramenta para unir 2 ou + contêineres para execução de uma aplicação específica. Ajuda a definir e compartilahr aplicativos de vários contêineres. Com um arquivo YAML é possível definir os serviços e rodar e/ou parar todos os contêineres com um único comando.
@@ -144,9 +135,15 @@ Ferramenta para unir 2 ou + contêineres para execução de uma aplicação espe
 
 ##### Cluster - Docker Swarm
 __Cluster__ (do inglês cluster: grupo, aglomerado) consiste em computadores ligados que trabalham em conjunto, de modo que, em muitos aspectos, podem ser considerados como um único sistema. Computadores em cluster executam a mesma tarefa, controlada e programada por software. Cada computador presente em cluster é conhecido como __nó (node)__.
+
 __Swarm__ é um recurso do Docker que fornece funcionalidades de orquestração de contêiner, incluindo clustering nativo de hosts do Docker e agendamento de cargas de trabalho de contêineres. Um grupo de hosts do Docker formam um cluster Swarm. Um Swarm é composto por 2 tipos de hosts de contêiner:
-* nós __gerenciadores:__ considerados os "zeladores" do estado Swarm; formam um grupo de consenso que mantém o reconhecimento do estado dos seviços em execução no Swam; sua função é garantir que o estado real do Swarm seja sempre condizente com o estado desejado, conforme definido pelo desenvolvedor ou administrador
+* nós __gerenciadores:__ considerados os "zeladores" do estado Swarm; formam um grupo de consenso que mantém o reconhecimento do estado dos seviços em execução no Swam; sua função é garantir que o estado real do Swarm seja sempre condizente com o estado desejado, conforme definido pelo desenvolvedor ou administrador; também podem conter contêineres; importante ter um backup do gerenciador
 * nós de __trabalho:__ deve usar um "token de associação" (gerado pelo nó gerenciador quando o Swarm foi inicializado) para ingressar no Swarm
 → todos os comandos CLI do Docker para controlar e monitorar um Swarm devem ser executados em um de seus nós gerenciadores
+→ para que o cluster Swarm esteja ativo e funcionando, pelo menos 51% dos managers devem estar em funcionamento
 
-
+__Comandos:__
+* `docker swarm init` → iniciar o Docker Swarm
+* `docker service rm app` → excluir um serviço no Docker Swarm com o nome de app
+* `vagrant ssh` → comando do Vagrant para realizar o acesso remoto a uma máquina virtual
+* `vagrant up` → comando do Vagrant para "subir" as máquinas virtuais a partir de um arquivo de configuração chamado Vagrantfile
