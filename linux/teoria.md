@@ -107,10 +107,10 @@ Ponte entre o usuário e o hardware, compõe a parte central do SO e responde po
     * nenhuma = 0
 
 #### Gerenciamento de pacotes
-* `apt` = gerenciador de pacotes em distribuições Debian/Ubuntu
 * `dnf` e `yum` = gerenciador de pacotes em distribuições Fedora/openSUSE/Red Hat
-* `apt-get` = gerenciador mais baixo nível (do sistema), não muito amigável com o usuário, não passa muitas informações, usado para, por exemplo, instalar aplicativos que serão usados no servidor
-* `apt` = gerenciador mais moderno, tem uma interação mais amigável, usado para, por exemplo, para saber se tem algo que precisa atualizar, para fazer buscas
+* `apt` = gerenciador de pacotes em distribuições Debian/Ubuntu
+    * `apt-get` = gerenciador mais baixo nível (do sistema), não muito amigável com o usuário, não passa muitas informações, usado para, por exemplo, instalar aplicativos que serão usados no servidor; usado quando for trabalhar com scripts
+    * `apt` = gerenciador mais moderno, tem uma interação mais amigável, usado para, por exemplo, para saber se tem algo que precisa atualizar, para fazer buscas
 * `apt list` = verificar quais pacotes há disponíveis no sistema para baixar
 * `apt list --installed` = verificar quais pacotes estão instalados na máquina atualmente
 * `apt list --upgradable` = verificar se há atualizações a serem feitas
@@ -206,6 +206,15 @@ __Particionamento:__ divisão de um disco em partes; cada parte ou partição é
 * `create database <nome>;` = criar database
 * `use <nome database>;`= usar database
 
-
 __OBS:__ `ifconfig` = verificar o IP da máquina, disponível no pacote `net-tools`
 
+***
+
+### Infraestrutura como Código (IaC)
+É é o gerenciamento e provisionamento da infraestrutura por meio de códigos, em vez de processos manuais. Com a IaC, são criados arquivos de configuração que incluem as especificações da sua infraestrutura, facilitando a edição e a distribuição de configurações. Ela também assegura o provisionamento do mesmo ambiente todas as vezes.
+
+### Controle de versão
+O controle de versão é uma parte importante da IaC. Os arquivos de configuração devem pertencer à fonte como qualquer outro código-fonte de software. Ao implantar a infraestrutura como código, também é possível separá-la em módulos, que podem ser combinados de diferentes maneiras por meio da automação.
+
+### Principal benefício
+Ao automatizar o provisionamento da infraestrutura com a IaC, os desenvolvedores não precisam provisionar e gerenciar manualmente servidores, sistemas operacionais, armazenamento e outros componentes de infraestrutura sempre que criam ou implantam uma aplicação.
