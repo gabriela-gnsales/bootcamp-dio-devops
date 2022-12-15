@@ -12,8 +12,7 @@ Microsserviços são uma abordagem arquitetônica e organizacional do desenvolvi
 As arquiteturas de microsserviços facilitam a escalabilidade e agilizam o desenvolvimento de aplicativos, habilitando a inovação e acelerando o tempo de introdução de novos recursos no mercado.
 
 #### Contêineres
-Os contêineres são uma tecnologia usada para reunir um aplicativo e todos os seus arquivos necessários em um ambiente de tempo de execução. Como uma unidade, o contêiner pode ser facilmente movido e executado em
-qualquer sistema operacional, em qualquer contexto.
+Os contêineres são uma tecnologia usada para reunir um aplicativo e todos os seus arquivos necessários em um ambiente de tempo de execução. Como uma unidade, o contêiner pode ser facilmente movido e executado em qualquer sistema operacional, em qualquer contexto.
 
 #### Docker
 Com o Docker é possível lidar com os contêineres como se fossem máquinas
