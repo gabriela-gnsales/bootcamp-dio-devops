@@ -74,6 +74,22 @@ comando é utilizado para iniciar o Minikube - minikube start
 * permite executar comandos em clusters do K8s
 * usada para implantar aplicativos, inspecionar e gerenciar recursos de cluster e visualizar logs
 Site de download: https://kubernetes.io/docs/tasks/tools/
+__Comandos:__
+* `kubectl get services`
+* `kubectl get pods` ou `kubectl get pod` → visualizar os pods em execução em um cluster K8s
+    * `-o wide` → flag para ter informações adicionais do pod
+* `kubectl apply -f <nome arquivo>` → implementar / criar um pod a partir de um arquivo YAML
+    * `-f <nome arquivo>` ou `--filename=<nome arquivo>` → flag para indicar o nome do arquivo
+* `kubectl delete pod <nome>` → deletar pod
+* `kubectl get nodes` ou `kubectl get node`
+* `kubectl get deployment`
+* `kubectl describe node <nome>` → saber as características do nó
+* `kubectl scale deployment <nome> --replicas=<quantidade>` → aumentar a quantidade de pods disponíveis em um determinado deployment; escalar a aplicação
+* `kubectl expose deployment <nome> --type=LoadBalancer --name=app-html --port=80` → expor um deployment com o nome de app-html, no formato de load balancer e utilizando a porta 80
+    * em caso de estar usando o minikube: `minikube service --url <nome app>` → obter o IP e a porta que serão utilizados internamente (na própria máquina)
+
+
+__deployment__ → usado para criar réplicas de um pod específico
 
 #### Amazon Elastic Kubernetes Service (Amazon EKS)
 * serviço gerenciado de K8s que descarta a necessidade de instalar e operar a camada de gerenciamento do cluster
