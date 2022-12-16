@@ -122,6 +122,8 @@ _RECOMENDAÇÃO:_ usar volumes, pois são criados e gerenciados pelo docker
 * `docker image build`  → gerar uma imagem a partir de um docker file
 * criar servidor (numa empresa, por exemplo) para armazenar imagens privadas
 * `registry` → contêiner especifico para armazenar imagens; repositório de imagens
+* `dockerfile` → arquivo utilizado pelo docker build para gerar uma imagem personalizada de um contêiner 
+* `docker build` → gerar uma imagem a partir de um dockerfile
 * `WORKDIR` → parâmetro do arquivo docker file que indica o diretório padrão da aplicação da imagem
 
  __OBS:__ um arquivo Pid contém o nº de identificação do processo (pid)
