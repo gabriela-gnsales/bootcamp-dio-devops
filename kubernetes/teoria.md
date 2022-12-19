@@ -21,8 +21,8 @@ e até milhares de contêineres; as aplicações podem estar em diferentes ambie
 * no mínimo, um cluster contém um plano de controle e pelo menos uma máquina ou nó
 * todo cluster possui ao menos um servidor de processamento (worker node)
 
-> * o servidor de processamento (worker) hospeda os __pods__, que são componentes de uma aplicação
-> * o ambiente de gerenciamento gerencia os nós de processamento e os pods no cluster
+> * o servidor de processamento (worker) hospeda os __Pods__, que são componentes de uma aplicação
+> * o ambiente de gerenciamento gerencia os nós de processamento e os Pods no cluster
 > * em ambientes de produção, o ambiente de gerenciamento é geralmente executado em múltiplos computadores, provendo tolerância a falhas e alta disponibilidade
 
 Os componentes da camada de gerenciamento tomam decisões globais sobre o cluster, bem como detectam e respondem aos eventos do cluster.
@@ -31,23 +31,23 @@ Os componentes da camada de gerenciamento podem ser executados em qualquer máqu
 
 __Componentes da camada de gerenciamento:__
 * kube apiserver
-    * o servidor de API do K8s valida e configura dados para os objetos presentes no cluster, que incluem pods, serviços,controladores de replicação e outros
+    * o servidor de API do K8s valida e configura dados para os objetos presentes no cluster, que incluem Pods, serviços,controladores de replicação e outros
     * o API Server atende às operações e fornece o frontend para o estado compartilhado do cluster por meio do qual todos os outros componentes interagem
 * etcd
     * etcd é um armazenamento de valor em cluster
     * ele ajuda a viabilizar atualizações automáticas mais seguras, coordena a programação de trabalhos em hosts e ajuda a configurar redes de sobreposição para contêineres
     * é um componente importante de vários outros projetos, se destaca por ser o armazenamento de dados principal do K8s 
 * kube scheduler
-    * kube scheduler é um processo que atribui pods a nós
-    * ele determina quais nós são os posicionamentos válidos para cada pod na fila de agendamento de acordo com as restrições e os recursos disponíveis
-    * o kube scheduler então classifica cada Node válido e vincula o pod a um Node adequado
+    * kube scheduler é um processo que atribui Pods a nós
+    * ele determina quais nós são os posicionamentos válidos para cada Pod na fila de agendamento de acordo com as restrições e os recursos disponíveis
+    * o kube scheduler então classifica cada Node válido e vincula o Pod a um Node adequado
 * kube controller manager
     * um controlador é um loop que observa o estado compartilhado do cluster por meio do kube apiserver e faz alterações tentando mover o estado atual para o estado desejado
 
 __Administração da camada de gerenciamento:__
 * kubeadm: o comando para criar o cluster
 * kubelet: o componente que executa em todas as máquinas no seu cluster e
-cuida de tarefas como a inicialização de pods e contêineres
+cuida de tarefas como a inicialização de Pods e contêineres
 * kubectl: a ferramenta de linha de comando para interação com o cluster
 
 #### Pod
@@ -55,7 +55,7 @@ cuida de tarefas como a inicialização de pods e contêineres
 * menor unidade do Kubernetes
 * uma abstração sobre o contêiner
 * normalmente é executada uma aplicação por Pod
-→ os contêineres são agrupados nesses pods para que os recursos sejam compartilhados de modo mais inteligente
+→ os contêineres são agrupados nesses Pods para que os recursos sejam compartilhados de modo mais inteligente
 
 #### Minikube
 * utilitário que pode ser usado para executar o K8s em uma máquina local
@@ -76,20 +76,20 @@ comando é utilizado para iniciar o Minikube - minikube start
 Site de download: https://kubernetes.io/docs/tasks/tools/
 __Comandos:__
 * `kubectl get services`
-* `kubectl get pods` ou `kubectl get pod` → visualizar os pods em execução em um cluster K8s
-    * `-o wide` → flag para ter informações adicionais do pod
-* `kubectl apply -f <nome arquivo>` → implementar / criar um pod a partir de um arquivo YAML
+* `kubectl get pods` ou `kubectl get pod` → visualizar os Pods em execução em um cluster K8s
+    * `-o wide` → flag para ter informações adicionais do Pod
+* `kubectl apply -f <nome arquivo>` → implementar / criar um Pod a partir de um arquivo YAML
     * `-f <nome arquivo>` ou `--filename=<nome arquivo>` → flag para indicar o nome do arquivo
-* `kubectl delete pod <nome>` → deletar pod
+* `kubectl delete pod <nome>` → deletar Pod
 * `kubectl get nodes` ou `kubectl get node`
 * `kubectl get deployment`
 * `kubectl describe node <nome>` → saber as características do nó
-* `kubectl scale deployment <nome> --replicas=<quantidade>` → aumentar a quantidade de pods disponíveis em um determinado deployment; escalar a aplicação
+* `kubectl scale deployment <nome> --replicas=<quantidade>` → aumentar a quantidade de Pods disponíveis em um determinado deployment; escalar a aplicação
 * `kubectl expose deployment <nome> --type=LoadBalancer --name=app-html --port=80` → expor um deployment com o nome de app-html, no formato de load balancer e utilizando a porta 80
     * em caso de estar usando o minikube: `minikube service --url <nome app>` → obter o IP e a porta que serão utilizados internamente (na própria máquina)
 
 
-__deployment__ → usado para criar réplicas de um pod específico
+__deployment__ → usado para criar réplicas de um Pod específico
 
 #### Amazon Elastic Kubernetes Service (Amazon EKS)
 * serviço gerenciado de K8s que descarta a necessidade de instalar e operar a camada de gerenciamento do cluster
@@ -98,3 +98,29 @@ __deployment__ → usado para criar réplicas de um pod específico
 __Serviços similares ao EKS:__
 * GCP Kubernetes Engine (GKE)
 * Azure Kubernetes Service (AKS)
+
+***
+
+* service = tipo de serviço criado e vinculado a um pod com um banco de dados para realizar uma conexão com este banco via código
+* LoadBalancer = tipo de serviço no K8s que gera um ip fixo para acesso a um deployment
+* `kubectl port-forward pod/bd-mysql 3306:3306` = comando utilizado no K8s para o encaminhamento da porta 3306 no cluster para a porta 3306 em Pod com o nome de bd-mysql
+* `kubectl exec` = comando utilizado para executar aplicações em um Pod
+
+***
+
+#### Persistência de dados em clusters K8s
+O K8s possui 2 APIs:
+* __PersistentVolume (PV):__
+    * plugins de volume
+    * tem um ciclo de vida independente de qualquer Pod que utilize um PV
+    * tem por objetivo mostrar os detalhes da implementação do armazenamento, seja ele NFS, iSCSI ou um armazenamento específico de um provedor de cloud pública
+* __PersistentVolumeClaim (PVC):__
+    * requisição para armazenamento por um usuário
+    * claims podem solicitar ao PV tamanho e modos de acesso específicos
+    * uma reivindicação de volume pesistente (PVC) é a solicitação de armazenamento que é atendida vinculando a PVC a um volume persistente (PV) 
+* Meios de acesso:
+    * __ReadWriteOnce:__ o volume pode ser montado como leitura-gravação por um único nó
+    * __ReadOnlyMany:__ o volume pode ser montado somente para leitura por muitos nós
+    * __ReadWriteMany:__ o volume pode ser montado como leitura-gravação por muitos nós
+* NFS: serviço que possibilita o compartilhamento de arquivos entre máquinas remotas através de uma rede; neste sistema usa-se o Modelo Cliente Servidor
+
