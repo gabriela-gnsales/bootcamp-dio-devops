@@ -102,7 +102,7 @@ __Serviços similares ao EKS:__
 ***
 
 * service = tipo de serviço criado e vinculado a um pod com um banco de dados para realizar uma conexão com este banco via código
-* LoadBalancer = tipo de serviço no K8s que gera um ip fixo para acesso a um deployment
+* LoadBalancer = tipo de serviço no K8s que gera um IP fixo para acesso a um deployment
 * `kubectl port-forward pod/bd-mysql 3306:3306` = comando utilizado no K8s para o encaminhamento da porta 3306 no cluster para a porta 3306 em Pod com o nome de bd-mysql
 * `kubectl exec` = comando utilizado para executar aplicações em um Pod
 
@@ -123,4 +123,41 @@ O K8s possui 2 APIs:
     * __ReadOnlyMany:__ o volume pode ser montado somente para leitura por muitos nós
     * __ReadWriteMany:__ o volume pode ser montado como leitura-gravação por muitos nós
 * NFS: serviço que possibilita o compartilhamento de arquivos entre máquinas remotas através de uma rede; neste sistema usa-se o Modelo Cliente Servidor
+
+***
+
+#### Deployment e Rollback
+→ deploy sistemático sem fazer um downtime (período em que um sistema, atividade ou processo de TI é temporariamente interrompido) na aplicação
+* `kubectl apply -f <nome arquivo>.yml --record`
+    * `--record` → flag para que o histórico de deployment possa ser visualizado
+    * ex: `kubectl apply -f appv1.yml --record` ; `kubectl apply -f appv2.yml --record`
+* `kubectl rollout history deployment <nome deployment>` → utilizado para consultar o histórico de deployment
+* `kubectl rollout undo deployment <nome deployment>` → utilizado para voltar ao último deployment aplicado
+
+#### Secrets
+* objeto que contém uma pequena quantidade de informações sensíveis, como senhas, tokens ou chaves
+* este tipo de informação poderia, em outras circunstâncias, ser colocada diretamente em uma configuração de Pod ou em uma imagem de container
+* o uso de Secrets evita a inclusão de dados confidenciais no código
+* podem ser criados de forma independente dos Pods que os consomem
+* reduz o risco de que o Secret e seus dados sejam expostos durante o processo de criação, visualização e edição ou atualização de Pods
+* `kubectl apply -f <nome secret>.yml`
+* `kubectl get secrets`
+* `kubectl delete secrets <nome secret>.yml`
+
+***
+
+#### Deploy
+* a implantação (deploy) envolve mover o software de um ambiente controlado para outro
+* um ambiente é um subconjunto de infraestrutura de TI usado para uma finalidade específica
+
+#### Integração contínua (CI)
+* prática de desenvolvimento de software em que os desenvolvedores, com frequência, juntam suas alterações de código em um repositório central e depois, criações e testes são
+executados
+* os principais objetivos da CI são encontrar e investigar erros mais rapidamente, melhorar a qualidade do software e reduzir o tempo necessário para validar e lançar novas atualizações de software
+
+#### Entrega contínua (CD)
+* prática de desenvolvimento de software em que alterações de código são criadas, testadas e preparadas automaticamente para liberação para produção
+* ela expande com base na integração contínua, pela implantação de todas as alterações de código em um ambiente de teste e/ou ambiente de produção, após o estágio de criação
+* quando a integração contínua for implementada adequadamente, os desenvolvedores sempre terão um artefato de criação pronto para ser implantado, e que passou por um processo de teste padronizado
+
 
