@@ -7,5 +7,5 @@
 * __Conteúdos:__
     * Linux
     * Docker
-    * Kubernets
+    * Kubernetes
     * AWS
